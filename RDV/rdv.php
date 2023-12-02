@@ -1,3 +1,11 @@
+<?php
+  include '../functions.php';
+
+  $conn = dbConnect();
+
+  echo("test")
+ ?>
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
