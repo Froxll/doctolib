@@ -1,0 +1,5 @@
+PRACTICIEN: mail, nom, prenom, telephone, ville, specialite, mdp
+DONNE, 0N PRACTICIEN, 11 RDV
+RDV: id, date, horaire
+PREND, 0N PATIENT, 11 RDV
+PATIENT: mail, nom, prenom, telephone, mdp
