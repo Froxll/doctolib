@@ -48,7 +48,7 @@
                         <a class="nav-link active" aria-current="page" href="../RDV/rdv.php">Mes RDV</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="../Connexion/connexion.php">Se connectera</a>
+                        <a class="nav-link" href="../Connexion/connexion.php">Se connecter</a>
                       </li>
                     </ul>
                   </div>

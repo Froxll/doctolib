@@ -1,0 +1,31 @@
+.nav-link.active{
+    background-color: #003248 !important;
+    border-radius: 5px;
+}
+
+main{
+    display: flex;
+}
+
+#section1 {
+    text-align: center;
+    flex:1;
+
+}
+
+#section2 {
+    text-align: center;
+    flex:1;
+
+}
+
+.vr{
+   height: 500px;
+   width: 10px;
+   opacity: 100%;
+   border-radius: 5px;
+   margin-top: 50px;
+   margin-bottom: 50px;
+}
+
+
