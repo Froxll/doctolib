@@ -33,3 +33,19 @@
     box-sizing: border-box;
     display: flex;
 }
+
+.navbar{
+    height: 200px;
+}
+
+.navbar-nav{
+    margin-left: 80px !important;  
+}
+
+.textInput,.textSubmit{
+    background-color: white !important;
+    border-color: black !important;
+    color: black !important;
+    border-radius: 5px;
+    box-shadow: none;
+}
