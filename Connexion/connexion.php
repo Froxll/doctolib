@@ -45,28 +45,44 @@
 
         <main>
             <div id="formulaire">   
-                <select class="form-select" aria-label="Default select example">
-                    <option selected="">Vous êtes ?</option>
-                    <option value="Patient">Patient</option>
-                    <option value="Praticien">Praticien</option>
-                </select>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="inlineRadioOptions"
+                    id="inlineRadio1"
+                    value="option1"
+                  />
+                  <label class="form-check-label" for="inlineRadio1">Patient</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="inlineRadioOptions"
+                    id="inlineRadio2"
+                    value="option2"
+                  />
+                  <label class="form-check-label" for="inlineRadio2">Praticien</label>
+                </div>
                 <br>
-                <form>
+                <form action="recuperation.php" method="post">
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <label for="exampleInputEmail1" class="form-label">Adresse mail</label>
+                    <input name='mail' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
+                    <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
+                    <input name='mdp' type="password" class="form-control" id="exampleInputPassword1">
                 </div>
                 <button type="submit" class="btn btn-primary">Se connecter</button>
                 </form>
                 <div id="inscription">
                     <a>Créez un compte :</a>
-                    <a class="type" href="#">Patient</a>
+                    <a class="type" href="/Code/doctolib/Connexion/InscriptionPatient/inscriptionpatient.php">Patient</a>
                     <a> / </a>
-                    <a class="type" href="#">Praticien</a>
+                    <a class="type" href="/Code/doctolib/Connexion/InscriptionPracticien/inscriptionpracticien.php">Praticien</a>
                 </div>    
             </div>
         </main>
