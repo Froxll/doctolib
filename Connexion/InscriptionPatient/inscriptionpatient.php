@@ -14,6 +14,7 @@
         <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
         <title> Inscription Patient </title>
         <link href="inscriptionpatient.css" rel="stylesheet">
+        <link href="../../header.css" rel="stylesheet">
     </head>
     <body>
 

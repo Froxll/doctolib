@@ -2,3 +2,34 @@
     background-color: #003248 !important;
     border-radius: 5px;
 }
+
+.global-container {
+    display: flex;
+   
+    justify-content: center;
+    height: 100vh;
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+}
+
+.box {
+    border: 1px solid #ddd;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.col-part {
+    flex: 1; /* Each part takes 25% of the width of the .col */
+    text-align: center;
+    border: 1px solid #ddd;
+}
+  
+.col {
+    flex: 1 1 0;
+    padding: 15px;
+    box-sizing: border-box;
+    display: flex;
+}

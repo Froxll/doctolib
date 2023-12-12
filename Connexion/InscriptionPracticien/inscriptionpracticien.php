@@ -1,5 +1,5 @@
 <?php
-  include '../functions.php';
+  include '../../functions.php';
 
   $conn = dbConnect();
 
@@ -14,6 +14,7 @@
         <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
         <title> Inscription Practicien </title>
         <link href="inscriptionpracticien.css" rel="stylesheet">
+        <link href="../../header.css" rel="stylesheet">
     </head>
     <body>
 
