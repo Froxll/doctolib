@@ -1,5 +1,5 @@
 <?php
-/*
+
   include '../functions.php';
 
   $conn = dbConnect();
@@ -16,7 +16,7 @@
   // Mettre if isset tout en haut du document
 
   echo("test")
-*/
+
 
 // INSERT fonctionne mais vu qu'on ajoute à chaque reload ça bug car la même adresse mail est ajoutée.
 
