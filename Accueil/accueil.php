@@ -1,8 +1,15 @@
 <?php
 
+function ajoutRdvInfo(){
+  $htmlReturned = "";
+  $htmlReturned .= "Ceci est un test ";
+  
 
 
+  return $htmlReturned;
+}
 
+$html = '<div class="row">';    //On stock le html que l'on veut ajouter dans cette variable
 
   include '../functions.php';
 
@@ -10,30 +17,36 @@
 
   if (isset($_POST["submit"])) {
     $str = $_POST["search"];
-    $statement = $conn->prepare("SELECT nom,prenom,telephone,specialite FROM PRACTICIEN WHERE nom LIKE :search");
+    $statement_name = $conn->prepare("SELECT nom,prenom,telephone,specialite FROM PRACTICIEN WHERE nom LIKE :search OR specialite LIKE :search");
     $searchValue = '%' . $str . '%';
 
-    $statement->bindParam(':search', $searchValue, PDO::PARAM_STR);
-    $statement->setFetchMode(PDO:: FETCH_OBJ);
-    $statement -> execute();
-    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+    $statement_name->bindParam(':search', $searchValue, PDO::PARAM_STR);
+    $statement_name->setFetchMode(PDO:: FETCH_OBJ);
+    $statement_name -> execute();
+    $result_name = $statement_name->fetchAll(PDO::FETCH_ASSOC);
 
-  $nombreColonnes = count($result);
-
-  // Initialisez une variable pour stocker le HTML généré
-  $html = '<div class="row">';
+    
+    $nombreColonnes = count($result_name);
   
   // Boucle pour générer les colonnes
   for ($i = 0; $i < $nombreColonnes; $i++) {
       $html .= '<div class="col">';
       
       // Boucle pour générer les parties de chaque colonne
-      $html .= '<div class="col-part">'.$result[$i]['nom'].'</div>';
+      $html .= '<div class="col-part">'.$result_name[$i]['nom'].'</div>';
 
-      $html .= '<div class="col-part">'.$result[$i]['prenom'].'</div>';
-      $html .= '<div class="col-part">'.$result[$i]['telephone'].'</div>';
-      $html .= '<div class="col-part">'.$result[$i]['specialite'].'</div>';
-  
+      $html .= '<div class="col-part">'.$result_name[$i]['prenom'].'</div>';
+      $html .= '<div class="col-part">'.$result_name[$i]['telephone'].'</div>';
+      $html .= '<div class="col-part">'.$result_name[$i]['specialite'].'</div>';
+      $html .= '<span class="material-symbols-outlined" onclick="openModal()">calendar_month</span>';
+      $html .= '<div id="modal">';
+      $html .= '<div id="modal-content">';
+
+      $html .= ajoutRdvInfo();
+
+      $html .= '<div id="close" onclick="closeModal()">&times;</div>'; 
+      $html .= '</div>';
+      $html .= '</div>';
       $html .= '</div>';
   }
 
@@ -47,25 +60,17 @@
 $result = $statement->fetchAll(PDO::FETCH_ASSOC);
   return $result;
 
-PISTE POUR AJOUTER LES PRACTICIENS AVEC LE BON AFFICHAGE
-    $add_nom = '<div class="col-part nom">';
-      $add_nom .= $result[$i]['nom'];
-      $add_nom .= '</div>';
-
-
-  
-    $statement->setFetchMode(PDO:: FETCH_OBJ);
-    $statement -> execute();
-
-    echo print_r($sth->fetch());
-  }
-
   $res = $conn->query("INSERT INTO PATIENT values ('nathan@gadbin.com', 'Nathan', 'GADBIN', '0707070708', 'network')");
 
+  $res = $conn->query("DELETE FROM PRACTICIEN WHERE nom = 'Nathan'");
+  $res = $conn->query("DELETE FROM PRACTICIEN WHERE nom = 'Hermann'");
+  $res = $conn->query("DELETE FROM PRACTICIEN WHERE nom = 'Natalie'");
+  $res = $conn->query("DELETE FROM PRACTICIEN WHERE nom = 'Nathaniel'");
+
   $res = $conn->query("INSERT INTO PRACTICIEN values ('nathan@gadbin.com', 'Nathan', 'GADBIN', '0707070708', 'SMDD', 'Generaliste', 'network')");
-  $res = $conn->query("INSERT INTO PRACTICIEN values ('hermann@gadbin.com', 'Hermann', 'GADBIN', '0707070708', 'SMDD', 'Generaliste', 'network')");
-  $res = $conn->query("INSERT INTO PRACTICIEN values ('natalie@gadbin.com', 'Natalie', 'GADBIN', '0707070708', 'SMDD', 'Generaliste', 'network')");
-  $res = $conn->query("INSERT INTO PRACTICIEN values ('nathaniel@gadbin.com', 'Nathaniel', 'GADBIN', '0707070708', 'SMDD', 'Generaliste', 'network')");
+  $res = $conn->query("INSERT INTO PRACTICIEN values ('hermann@gadbin.com', 'Hermann', 'GADBIN', '0707070708', 'SMDD', 'Podologue', 'network')");
+  $res = $conn->query("INSERT INTO PRACTICIEN values ('natalie@gadbin.com', 'Natalie', 'GADBIN', '0707070708', 'SMDD', 'Dermatologue', 'network')");
+  $res = $conn->query("INSERT INTO PRACTICIEN values ('nathaniel@gadbin.com', 'Nathaniel', 'GADBIN', '0707070708', 'SMDD', 'Psychologue', 'network')");
 
   if($res) {
     echo "ca marche";
@@ -88,8 +93,8 @@ PISTE POUR AJOUTER LES PRACTICIENS AVEC LE BON AFFICHAGE
         <meta charset="utf-8">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+        <script src="accueil.js" defer></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
         <title> Accueil </title>
         <link href="accueil.css" rel="stylesheet">
         <link href="../header.css" rel="stylesheet">
@@ -134,10 +139,14 @@ PISTE POUR AJOUTER LES PRACTICIENS AVEC LE BON AFFICHAGE
                 <?php
                   echo $html;
                 ?>
+
+                
           
               </div>
             </div>
           </div>
+
+          
 
         </main>
 
@@ -147,3 +156,4 @@ PISTE POUR AJOUTER LES PRACTICIENS AVEC LE BON AFFICHAGE
 
     </body>
 </html>
+
