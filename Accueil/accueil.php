@@ -6,6 +6,21 @@ include '../functions.php';
 
 $conn = dbConnect();
 
+
+/*
+try {
+  // Requête SQL pour modifier la colonne 'mdp' dans la table 'pratitien'
+  $sql = "ALTER TABLE PATIENT ALTER COLUMN mdp TYPE VARCHAR(60)";
+
+  // Exécution de la requête
+  $conn->exec($sql);
+
+  echo "La colonne a été mise à jour avec succès.";
+} catch (PDOException $e) {
+  echo "Erreur : " . $e->getMessage();
+}
+*/
+
 function ajoutRdvInfo($SearchMailPracticien){
 
   $conn = dbConnect();
@@ -21,7 +36,7 @@ function ajoutRdvInfo($SearchMailPracticien){
   return $PracticienRdvInfo;
 }
 
-$idRDV = 128;
+
 
 /*
 $html = '<div class="row">';    //On stock le html que l'on veut ajouter dans cette variable
@@ -152,7 +167,7 @@ $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
             <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-body" data-bs-theme="dark">
                 <div class="container-fluid">
-                  <a class="navbar-brand" href="http://localhost/Code/doctolib/Accueil/accueil.php">Accueil</a>
+                  <a class="navbar-brand" href="accueil.php">Accueil</a>
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
@@ -173,10 +188,10 @@ $result = $statement->fetchAll(PDO::FETCH_ASSOC);
                   <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                       <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="http://localhost/Code/doctolib/RDV/rdv.php">Mes RDV</a>
+                        <a class="nav-link active" aria-current="page" href="../RDV/rdv.php">Mes RDV</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="http://localhost/Code/doctolib/Connexion/connexion.php">Connexion</a>
+                        <a class="nav-link" href="../Connexion/connexion.php">Connexion</a>
                       </li>
                     </ul>
                   </div>
@@ -377,23 +392,34 @@ $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
                 if(isset($_POST["submitHoraire"])){
 
-                  $res = $conn->query("SELECT MAX(id) FROM RDV");
-                  $res->setFetchMode(PDO::FETCH_ASSOC); 
-                  $res->execute();
+                  if(isset($_SESSION['mail'])){
+                    
+                    $res = $conn->query("SELECT MAX(id) FROM RDV");
+                    $res->setFetchMode(PDO::FETCH_ASSOC); 
+                    $res->execute();
 
-                  $maxID = 1;
+                    $maxID = 1;
 
-                  if ($res) {
-                    $maxID = $res->fetchColumn() + 1;
+                    if ($res) {
+                      $maxID = $res->fetchColumn() + 1;
+                    }
+
+                    $selectedHour = $_POST["submitHoraire"];
+                    $selectedMail = $_POST["submitMail"];
+                    $selectedDate = $_POST["submitDate"];
+
+                    $res = $conn->query("INSERT INTO RDV values ('$maxID','$selectedDate','$selectedHour','$selectedMail','nathan@gadbin.com')");
+
+                    echo "Votre rendez vous à bien été pris avec : " . $selectedMail . ", le " . $selectedDate . " à " . $selectedHour . ".";
+                    //il faut juste changer 'nathan@gadbin.com' avec l'email du mec qui est connecté (session jsp quoi)
+                  }
+                  else{
+                    echo "Veuillez vous connecter à votre compte pour prendre un rendez-vous.";
+                  }
+
                 }
-                echo $maxID;
-
-                  $selectedHour = $_POST["submitHoraire"];
-                  $selectedMail = $_POST["submitMail"];
-                  $selectedDate = $_POST["submitDate"];
-                  $res = $conn->query("INSERT INTO RDV values ('$maxID','$selectedDate','$selectedHour','$selectedMail','nathan@gadbin.com')");
-                  //il faut juste changer 'nathan@gadbin.com' avec l'email du mec qui est connecté (session jsp quoi)
-                }
+                
+                  
 
                 ?>
           
