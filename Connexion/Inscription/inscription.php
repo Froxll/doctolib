@@ -1,5 +1,13 @@
 <?php
   session_start();
+
+  if(isset($_SESSION['mail'])) {
+    echo $_SESSION['prenom'], " ", $_SESSION['nom'];
+  }
+
+  if(isset($_SESSION['mail'])) {
+    header('Location: http://localhost/Code/doctolib/Connexion/connexion.php');
+  }
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +18,7 @@
         <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
         <title> Connexion </title>
         <link href="http://localhost/Code/doctolib/header.css" rel="stylesheet">
-        <link href="connexion.css" rel="stylesheet">
+        <link href="inscription.css" rel="stylesheet">
     </head>
     <body>
 
@@ -22,15 +30,6 @@
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
-
-                  <div class="ID">
-                    <?php
-                      if(isset($_SESSION['mail'])){
-                        echo strtoupper($_SESSION['prenom']).' '.strtoupper($_SESSION['nom']).' '.'<img src="../bulle.png">';
-                      }
-                    ?>
-                  </div>
-                  
                   <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                       <li class="nav-item">
@@ -47,11 +46,10 @@
         </header>
 
         <main>
-            <div id="connexion">
+            <div id="inscription">
                 <form method="POST" align="center">
-                    <a href="http://localhost/Code/doctolib/Connexion/SeConnecter/seconnecter.php">Se connecter</a>
-                    <a href="http://localhost/Code/doctolib/Connexion/Inscription/inscription.php">S'inscrire</a>
-                    <a href="http://localhost/Code/doctolib/Connexion/Deconnexion/deconnexion.php" id="deconnexion">Se déconnecter</a>
+                    <a class="type" href="http://localhost/Code/doctolib/Connexion/Inscription/InscriptionPatient/inscriptionpatient.php">Patient</a>
+                    <a class="type" href="http://localhost/Code/doctolib/Connexion/Inscription/InscriptionPracticien/inscriptionpracticien.php">Praticien</a>
                 </form>
             </div>
         </main>

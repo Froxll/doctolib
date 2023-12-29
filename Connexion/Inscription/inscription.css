@@ -9,10 +9,6 @@ main a{
     margin-left: 50px;
 }
 
-main a#deconnexion{
-    background-color:  red;
-} 
-
-#connexion{
+#inscription{
     margin-top: 100px;
 }
