@@ -5,7 +5,8 @@
     echo $_SESSION['prenom'], " ", $_SESSION['nom'];
   }
 
-  if(isset($_SESSION['mail'])) {
+  if(isset($_SESSION['mail']) || isset($_SESSION['mail_p'])) {
+
     header('Location: ../connexion.php');
   }
 ?>
@@ -36,7 +37,9 @@
                         <a class="nav-link active" aria-current="page" href="../../RDV/rdv.php">Mes RDV</a>
                       </li>
                       <li class="nav-item">
+
                         <a class="nav-link" href="../connexion.php">Connexion</a>
+
                       </li>
                     </ul>
                   </div>

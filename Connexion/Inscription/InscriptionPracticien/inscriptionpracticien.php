@@ -3,7 +3,6 @@
 
   $conn = dbConnect();
 
-
  ?>
 
 <!DOCTYPE html>
@@ -14,7 +13,7 @@
         <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
         <title> Inscription Practicien </title>
         <link href="../../../header.css" rel="stylesheet">
-        <link href="inscriptionpracticien.css" rel="stylesheet">
+        <link href="../InscriptionPatient/inscriptionpatient.css" rel="stylesheet">
     </head>
     <body>
 
@@ -68,7 +67,7 @@
               <div class="col-12">
                 <button type="submit" class="btn btn-primary" name='envoie'>S'inscrire</button>
               </div>
-
+            
             <div id="error">
 
               <?php
@@ -99,13 +98,10 @@
                   }
                 }
               ?>
-
+            </form>
             </div>
-          </main>
-        <footer>
-
-        </footer>
-
+          </div>
+        </main>
     </body>
 
 </html>

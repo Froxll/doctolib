@@ -24,9 +24,12 @@
                   </button>
 
                   <div class="ID">
-                    <?php
+                  <?php
                       if(isset($_SESSION['mail'])){
                         echo strtoupper($_SESSION['prenom']).' '.strtoupper($_SESSION['nom']).' '.'<img src="../bulle.png">';
+                      }
+                      if(isset($_SESSION['mail_p'])){
+                        echo strtoupper($_SESSION['prenom']).' '.strtoupper($_SESSION['nom']).' '.'<img id="med" src="../med.png">';
                       }
                     ?>
                   </div>
