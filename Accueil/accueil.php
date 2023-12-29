@@ -1,11 +1,7 @@
 <?php
-
-
-
-
+  session_start();
 
   include '../functions.php';
-
   $conn = dbConnect();
 
   if (isset($_POST["submit"])) {
@@ -19,7 +15,6 @@
     $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
   $nombreColonnes = count($result);
-
   // Initialisez une variable pour stocker le HTML généré
   $html = '<div class="row">';
   
@@ -43,11 +38,11 @@
 
 }
 
-/*
-$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+  /*
+  $result = $statement->fetchAll(PDO::FETCH_ASSOC);
   return $result;
 
-PISTE POUR AJOUTER LES PRACTICIENS AVEC LE BON AFFICHAGE
+    //PISTE POUR AJOUTER LES PRACTICIENS AVEC LE BON AFFICHAGE
     $add_nom = '<div class="col-part nom">';
       $add_nom .= $result[$i]['nom'];
       $add_nom .= '</div>';
@@ -58,8 +53,8 @@ PISTE POUR AJOUTER LES PRACTICIENS AVEC LE BON AFFICHAGE
     $statement -> execute();
 
     echo print_r($sth->fetch());
-  }
-
+  
+ 
   $res = $conn->query("INSERT INTO PATIENT values ('nathan@gadbin.com', 'Nathan', 'GADBIN', '0707070708', 'network')");
 
   $res = $conn->query("INSERT INTO PRACTICIEN values ('nathan@gadbin.com', 'Nathan', 'GADBIN', '0707070708', 'SMDD', 'Generaliste', 'network')");
@@ -79,7 +74,7 @@ PISTE POUR AJOUTER LES PRACTICIENS AVEC LE BON AFFICHAGE
 
 
 // INSERT fonctionne mais vu qu'on ajoute à chaque reload ça bug car la même adresse mail est ajoutée.
-*/
+ */
  ?>
 
 <!DOCTYPE html>
@@ -100,7 +95,7 @@ PISTE POUR AJOUTER LES PRACTICIENS AVEC LE BON AFFICHAGE
 
             <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-body" data-bs-theme="dark">
                 <div class="container-fluid">
-                  <a class="navbar-brand" href="../Accueil/accueil.php">Accueil</a>
+                  <a class="navbar-brand" href="http://localhost/Code/doctolib/Accueil/accueil.php">Accueil</a>
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
@@ -110,13 +105,21 @@ PISTE POUR AJOUTER LES PRACTICIENS AVEC LE BON AFFICHAGE
                     <input type="submit" name="submit" class="textSubmit">
                   </form>
 
+                  <div class="ID">
+                    <?php
+                      if(isset($_SESSION['mail'])){
+                        echo strtoupper($_SESSION['prenom']).' '.strtoupper($_SESSION['nom']).' '.'<img src="../bulle.png">';
+                      }
+                    ?>
+                  </div>
+
                   <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                       <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="../RDV/rdv.php">Mes RDV</a>
+                        <a class="nav-link active" aria-current="page" href="http://localhost/Code/doctolib/RDV/rdv.php">Mes RDV</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="../Connexion/connexion.php">Se connecter</a>
+                        <a class="nav-link" href="http://localhost/Code/doctolib/Connexion/connexion.php">Connexion</a>
                       </li>
                     </ul>
                   </div>
@@ -130,10 +133,6 @@ PISTE POUR AJOUTER LES PRACTICIENS AVEC LE BON AFFICHAGE
           <div class="global-container">
             <div class="container text-center">
               <div class="row">
-
-                <?php
-                  echo $html;
-                ?>
           
               </div>
             </div>

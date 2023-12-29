@@ -1,3 +1,7 @@
+<?php
+  session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -18,13 +22,22 @@
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
+
+                  <div class="ID">
+                    <?php
+                      if(isset($_SESSION['mail'])){
+                        echo strtoupper($_SESSION['prenom']).' '.strtoupper($_SESSION['nom']).' '.'<img src="../bulle.png">';
+                      }
+                    ?>
+                  </div>
+
                   <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                       <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Mes RDV</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="../Connexion/connexion.php">Se connecter</a>
+                        <a class="nav-link" href="../Connexion/connexion.php">Connexion</a>
                       </li>
                     </ul>
                   </div>
