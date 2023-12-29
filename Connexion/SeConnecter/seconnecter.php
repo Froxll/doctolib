@@ -1,8 +1,8 @@
 <?php
   session_start();
 
-  if(isset($_SESSION['mail'])) {
-    header('Location: http://localhost/Code/doctolib/Connexion/connexion.php');
+  if(isset($_SESSION['mail']) || isset($_SESSION['mail_p'])) {
+    header('Location: ../connexion.php');
   }
 
   include '../../functions.php';
@@ -19,7 +19,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
         <title> Connexion </title>
         <link href="seconnecter.css" rel="stylesheet">
-        <link href="http://localhost/Code/doctolib/header.css" rel="stylesheet">
+        <link href="../../header.css" rel="stylesheet">
     </head>
     <body>
 
@@ -27,17 +27,17 @@
 
           <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-body" data-bs-theme="dark">
             <div class="container-fluid">
-              <a class="navbar-brand" href="http://localhost/Code/doctolib/Accueil/accueil.php">Accueil</a>
+              <a class="navbar-brand" href="../../Accueil/accueil.php">Accueil</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="http://localhost/Code/doctolib/RDV/rdv.php">Mes RDV</a>
+                    <a class="nav-link active" aria-current="page" href="../../RDV/rdv.php">Mes RDV</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="http://localhost/Code/doctolib/Connexion/connexion.php">Connexion</a>
+                    <a class="nav-link" href="../connexion.php">Connexion</a>
                   </li>
                 </ul>
               </div>
@@ -83,36 +83,69 @@
                 <div id="error">
                   <?php
                       if(isset($_POST['envoie'])){
+                          echo $_POST['inlineRadioOptions']; 
                           // Vérifications que tous les champs soient remplis
                           if(!empty($_POST['inlineRadioOptions']) AND !empty($_POST['mail']) AND !empty($_POST['mdp'])){
                             // Récupération des valeurs des champs
-                            $type = $_POST['inlineRadioOptions'];
-                            $mail = $_POST['mail'];
-                            $mdp_post = $_POST['mdp']; // Ne pas hasher le mot de passe ici
-
-                            // Préparation de la requête 
-                            $recupUser = $conn->prepare("SELECT nom, prenom, mdp FROM patient WHERE mail = ?");
-                            $recupUser->execute(array($mail));
-
-                            // Vérifier si l'utilisateur existe
-                            if($recupUser->rowCount() > 0){
-                              // Récupérer les données dans la BDD
-                              $userData = $recupUser->fetch(PDO::FETCH_ASSOC);
-
-                              // Vérifier le mot de passe
-                              if(password_verify($mdp_post, $userData['mdp'])){
-                                // Mot de passe correct, définir les variables de session
-                                $_SESSION['nom'] = $userData['nom'];
-                                $_SESSION['prenom'] = $userData['prenom'];
-                                $_SESSION['mail'] = $mail;
-
-                                // Rediriger vers la page d'accueil
-                                header('Location: http://localhost/Code/doctolib/Accueil/accueil.php');
+                            if($_POST['inlineRadioOptions'] == "option1"){
+                              $type = $_POST['inlineRadioOptions'];
+                              $mail = $_POST['mail'];
+                              $mdp_post = $_POST['mdp'];
+  
+                              // Préparation de la requête 
+                              $recupUser = $conn->prepare("SELECT nom, prenom, mdp FROM patient WHERE mail = ?");
+                              $recupUser->execute(array($mail));
+  
+                              // Vérifier si l'utilisateur existe
+                              if($recupUser->rowCount() > 0){
+                                // Récupérer les données dans la BDD
+                                $userData = $recupUser->fetch(PDO::FETCH_ASSOC);
+  
+                                // Vérifier le mot de passe
+                                if(password_verify($mdp_post, $userData['mdp'])){
+                                  // Mot de passe correct, définir les variables de session
+                                  $_SESSION['nom'] = $userData['nom'];
+                                  $_SESSION['prenom'] = $userData['prenom'];
+                                  $_SESSION['mail'] = $mail;
+  
+                                  // Rediriger vers la page d'accueil
+                                  header('Location: ../../Accueil/accueil.php');
+                                } else {
+                                  echo "Votre mot de passe est incorrect";
+                                }
                               } else {
-                                echo "Votre mot de passe est incorrect";
+                                echo "Adresse e-mail incorrecte";
                               }
-                            } else {
-                              echo "Adresse e-mail incorrecte";
+                            }
+                            elseif($_POST['inlineRadioOptions'] == "option2"){
+                                $type = $_POST['inlineRadioOptions'];
+                                $mail = $_POST['mail'];
+                                $mdp_post = $_POST['mdp'];
+    
+                                // Préparation de la requête 
+                                $recupUser = $conn->prepare("SELECT nom, prenom, mdp FROM practicien WHERE mail = ?");
+                                $recupUser->execute(array($mail));
+    
+                                // Vérifier si l'utilisateur existe
+                                if($recupUser->rowCount() > 0){
+                                  // Récupérer les données dans la BDD
+                                  $userData = $recupUser->fetch(PDO::FETCH_ASSOC);
+    
+                                  // Vérifier le mot de passe
+                                  if(password_verify($mdp_post, $userData['mdp'])){
+                                    // Mot de passe correct, définir les variables de session
+                                    $_SESSION['nom'] = $userData['nom'];
+                                    $_SESSION['prenom'] = $userData['prenom'];
+                                    $_SESSION['mail_p'] = $mail;
+    
+                                    // Rediriger vers la page d'accueil
+                                    header('Location: ../../Accueil/accueil.php');
+                                  } else {
+                                    echo "Votre mot de passe est incorrect";
+                                  }
+                                } else {
+                                  echo "Adresse e-mail incorrecte";
+                                }
                             }
                           } else {
                             echo "Veuillez compléter tous les champs";
