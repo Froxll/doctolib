@@ -67,6 +67,7 @@
               </div>
 
             <div id="error">
+
               <?php
                 if(isset($_POST['envoie'])){
                   if(!empty($_POST['prenom']) AND !empty($_POST['nom']) AND !empty($_POST['numero']) AND !empty($_POST['mail']) AND !empty($_POST['mdp'])){
@@ -92,8 +93,8 @@
                     echo "Veuillez completer tout les champs";
                   }
                 }
-              
               ?>
+              
             </div>
 
             </form>

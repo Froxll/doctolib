@@ -226,9 +226,6 @@ $result = $statement->fetchAll(PDO::FETCH_ASSOC);
                 }
 
 
-
-
-
                 if(isset($_POST["submitCalendar"])){
 
                   
@@ -396,9 +393,6 @@ $result = $statement->fetchAll(PDO::FETCH_ASSOC);
                   $selectedDate = $_POST["submitDate"];
                   $res = $conn->query("INSERT INTO RDV values ('$maxID','$selectedDate','$selectedHour','$selectedMail','nathan@gadbin.com')");
                   //il faut juste changer 'nathan@gadbin.com' avec l'email du mec qui est connecté (session jsp quoi)
-                  //et trouver un moyen que $idRDV s'autoincrement, j'ai modifié la BDD mais ce n'est pas détecté
-                  //et je ne sais pas comment faire des variables globales qui ne changent pas
-
                 }
 
                 ?>
