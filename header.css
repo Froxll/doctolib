@@ -41,6 +41,11 @@ img{
     margin-left: 5px;
 }
 
+img#med{
+    height: 30px;
+    width: 50px;
+}
+
 #error{
     color: red;
 }
