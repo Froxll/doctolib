@@ -37,7 +37,9 @@
                     <a class="nav-link active" aria-current="page" href="../../RDV/rdv.php">Mes RDV</a>
                   </li>
                   <li class="nav-item">
+
                     <a class="nav-link" href="../connexion.php">Connexion</a>
+
                   </li>
                 </ul>
               </div>
@@ -87,6 +89,7 @@
                           // Vérifications que tous les champs soient remplis
                           if(!empty($_POST['inlineRadioOptions']) AND !empty($_POST['mail']) AND !empty($_POST['mdp'])){
                             // Récupération des valeurs des champs
+
                             if($_POST['inlineRadioOptions'] == "option1"){
                               $type = $_POST['inlineRadioOptions'];
                               $mail = $_POST['mail'];
@@ -113,6 +116,7 @@
                                 } else {
                                   echo "Votre mot de passe est incorrect";
                                 }
+
                               } else {
                                 echo "Adresse e-mail incorrecte";
                               }

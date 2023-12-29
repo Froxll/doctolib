@@ -9,5 +9,6 @@
     } else {
         // Rediriger vers la page d'accueil si l'utilisateur n'est pas connecté
         header('Location: ../SeConnecter/seconnecter.php');
+
     }
 ?>

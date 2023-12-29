@@ -6,6 +6,21 @@ include '../functions.php';
 
 $conn = dbConnect();
 
+
+/*
+try {
+  // Requête SQL pour modifier la colonne 'mdp' dans la table 'pratitien'
+  $sql = "ALTER TABLE PATIENT ALTER COLUMN mdp TYPE VARCHAR(60)";
+
+  // Exécution de la requête
+  $conn->exec($sql);
+
+  echo "La colonne a été mise à jour avec succès.";
+} catch (PDOException $e) {
+  echo "Erreur : " . $e->getMessage();
+}
+*/
+
 function ajoutRdvInfo($SearchMailPracticien){
 
   $conn = dbConnect();
@@ -21,7 +36,7 @@ function ajoutRdvInfo($SearchMailPracticien){
   return $PracticienRdvInfo;
 }
 
-$idRDV = 128;
+
 
 /*
 $html = '<div class="row">';    //On stock le html que l'on veut ajouter dans cette variable
@@ -380,23 +395,34 @@ $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
                 if(isset($_POST["submitHoraire"])){
 
-                  $res = $conn->query("SELECT MAX(id) FROM RDV");
-                  $res->setFetchMode(PDO::FETCH_ASSOC); 
-                  $res->execute();
+                  if(isset($_SESSION['mail'])){
+                    
+                    $res = $conn->query("SELECT MAX(id) FROM RDV");
+                    $res->setFetchMode(PDO::FETCH_ASSOC); 
+                    $res->execute();
 
-                  $maxID = 1;
+                    $maxID = 1;
 
-                  if ($res) {
-                    $maxID = $res->fetchColumn() + 1;
+                    if ($res) {
+                      $maxID = $res->fetchColumn() + 1;
+                    }
+
+                    $selectedHour = $_POST["submitHoraire"];
+                    $selectedMail = $_POST["submitMail"];
+                    $selectedDate = $_POST["submitDate"];
+
+                    $res = $conn->query("INSERT INTO RDV values ('$maxID','$selectedDate','$selectedHour','$selectedMail','nathan@gadbin.com')");
+
+                    echo "Votre rendez vous à bien été pris avec : " . $selectedMail . ", le " . $selectedDate . " à " . $selectedHour . ".";
+                    //il faut juste changer 'nathan@gadbin.com' avec l'email du mec qui est connecté (session jsp quoi)
+                  }
+                  else{
+                    echo "Veuillez vous connecter à votre compte pour prendre un rendez-vous.";
+                  }
+
                 }
-                echo $maxID;
-
-                  $selectedHour = $_POST["submitHoraire"];
-                  $selectedMail = $_POST["submitMail"];
-                  $selectedDate = $_POST["submitDate"];
-                  $res = $conn->query("INSERT INTO RDV values ('$maxID','$selectedDate','$selectedHour','$selectedMail','nathan@gadbin.com')");
-                  //il faut juste changer 'nathan@gadbin.com' avec l'email du mec qui est connecté (session jsp quoi)
-                }
+                
+                  
 
                 ?>
           
