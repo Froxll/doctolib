@@ -410,11 +410,12 @@ $result = $statement->fetchAll(PDO::FETCH_ASSOC);
                     $selectedHour = $_POST["submitHoraire"];
                     $selectedMail = $_POST["submitMail"];
                     $selectedDate = $_POST["submitDate"];
+                    $userMail = $_SESSION['mail'];
 
-                    $res = $conn->query("INSERT INTO RDV values ('$maxID','$selectedDate','$selectedHour','$selectedMail','nathan@gadbin.com')");
+                    $res = $conn->query("INSERT INTO RDV values ('$maxID','$selectedDate','$selectedHour','$selectedMail','$userMail')");
 
                     echo "Votre rendez vous à bien été pris avec : " . $selectedMail . ", le " . $selectedDate . " à " . $selectedHour . ".";
-                    //il faut juste changer 'nathan@gadbin.com' avec l'email du mec qui est connecté (session jsp quoi)
+                    
                   }
                   else{
                     echo "Veuillez vous connecter à votre compte pour prendre un rendez-vous.";
