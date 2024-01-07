@@ -1,14 +1,11 @@
 <?php
   session_start();
 
-  if(isset($_SESSION['mail'])) {
-    echo $_SESSION['prenom'], " ", $_SESSION['nom'];
-  }
-
+  //Redirection
   if(isset($_SESSION['mail']) || isset($_SESSION['mail_p'])) {
-
     header('Location: ../connexion.php');
   }
+  
 ?>
 
 <!DOCTYPE html>

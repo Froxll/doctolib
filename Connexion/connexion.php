@@ -1,5 +1,7 @@
 <?php
   session_start();
+
+  include '../functions.php';
 ?>
 
 <!DOCTYPE html>
@@ -25,13 +27,8 @@
 
                   <div class="ID">
                   <?php
-                      if(isset($_SESSION['mail'])){
-                        echo strtoupper($_SESSION['prenom']).' '.strtoupper($_SESSION['nom']).' '.'<img src="../bulle.png">';
-                      }
-                      if(isset($_SESSION['mail_p'])){
-                        echo strtoupper($_SESSION['prenom']).' '.strtoupper($_SESSION['nom']).' '.'<img id="med" src="../med.png">';
-                      }
-                    ?>
+                    affichage_utilisateur_connecte();
+                  ?>
                   </div>
                   
                   <div class="collapse navbar-collapse" id="navbarNav">
