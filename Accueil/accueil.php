@@ -179,12 +179,7 @@ $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
                   <div class="ID">
                     <?php
-                      if(isset($_SESSION['mail'])){
-                        echo strtoupper($_SESSION['prenom']).' '.strtoupper($_SESSION['nom']).' '.'<img src="../bulle.png">';
-                      }
-                      if(isset($_SESSION['mail_p'])){
-                        echo strtoupper($_SESSION['prenom']).' '.strtoupper($_SESSION['nom']).' '.'<img id="med" src="../med.png">';
-                      }
+                      affichage_utilisateur_connecte();
                     ?>
                   </div>
 

@@ -15,3 +15,14 @@
         }
         return $conn;
     }
+
+    function affichage_utilisateur_connecte(){
+        if(isset($_SESSION['mail'])){
+            echo strtoupper($_SESSION['prenom']).' '.strtoupper($_SESSION['nom']).' '.'<img src="../bulle.png">';
+          }
+          if(isset($_SESSION['mail_p'])){
+            echo strtoupper($_SESSION['prenom']).' '.strtoupper($_SESSION['nom']).' '.'<img id="med" src="../med.png">';
+          }
+    }
+    
+?>
