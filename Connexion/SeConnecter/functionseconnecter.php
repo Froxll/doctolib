@@ -39,6 +39,7 @@
                 }
               }
               elseif($_POST['inlineRadioOptions'] == "option2"){
+                  //récupération des données
                   $type = $_POST['inlineRadioOptions'];
                   $mail = $_POST['mail'];
                   $mdp_post = $_POST['mdp'];

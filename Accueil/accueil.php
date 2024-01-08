@@ -3,6 +3,7 @@
 session_start();
 
 include '../functions.php';
+include 'functionaccueil.php';
 
 $conn = dbConnect();
 
@@ -19,26 +20,7 @@ try {
 } catch (PDOException $e) {
   echo "Erreur : " . $e->getMessage();
 }
-*/
 
-function ajoutRdvInfo($SearchMailPracticien){
-
-  $conn = dbConnect();
-
-  $BDDRDV = $conn->prepare("SELECT horaire,date FROM RDV WHERE mail_1 LIKE :SearchMailPracticien");
-
-  $BDDRDV->bindParam(':SearchMailPracticien', $SearchMailPracticien, PDO::PARAM_STR);
-  $BDDRDV->setFetchMode(PDO::FETCH_ASSOC); 
-  $BDDRDV->execute();
-
-  $PracticienRdvInfo = $BDDRDV->fetchAll();
-
-  return $PracticienRdvInfo;
-}
-
-
-
-/*
 $html = '<div class="row">';    //On stock le html que l'on veut ajouter dans cette variable
 
 
