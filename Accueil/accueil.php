@@ -95,9 +95,9 @@ if (isset($_POST["submit"])) {
 
 */
 
-//$res = $conn->query("DELETE FROM RDV WHERE date = '03/01/2024'");
+//$res = $conn->query("DELETE FROM RDV WHERE date = '09/01/2024'");
 
-//$res = $conn->query("INSERT INTO RDV values ('4','02/01/2024','16:30','natalie@gadbin.com','nathan@gadbin.com')")
+//$res = $conn->query("INSERT INTO RDV values ('4255','02/01/2024','16:30','natalie@gadbin.com','test@gmail.com')")
 
 
 /*
