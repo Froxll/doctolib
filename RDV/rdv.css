@@ -33,3 +33,18 @@ main{
     text-align: center;
     justify-content: center;
 }
+
+#globalHoraire{
+    display: flex !important;
+    justify-content: space-around;
+}
+
+#CSSHoraireLibre{
+    color: white;
+    background-color: green;
+}
+
+#CSSHorairePrise{
+    color: white;
+    background-color: red;
+}
